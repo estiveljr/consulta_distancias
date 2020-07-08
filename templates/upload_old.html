@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>-->
+    <!--    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>-->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"></script>
+    <title>Xcelis Consulting - Distâncias entre municípios</title>
+
+</head>
+<body>
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+    <a class="nav-link text-right">
+        <img style="width: 90px; height: 40px;" src="{{ url_for('static', filename='images/xcelis_original.png') }}">
+    </a>
+
+    <a class="navbar-brand">Xcelis Consulting</a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+</nav>
+
+<div class="jumbotron" style="padding-top:3%; padding-bottom:3%;">
+    <div class="container text-center">
+        <h2>Distâncias entre Municípios</h2>
+    </div>
+</div>
+
+<div class="container">
+
+
+
+<!--FORMULÁRIO DE UPLOAD DE ARQUIVO-->
+
+    <form action="/uploader" method="POST" enctype="multipart/form-data">
+
+        <div class="input-group">
+            <div class="custom-file">
+                <input type="file" name="file" class="file-input" id="inputGroupFile">
+                <label class="custom-file-label" for="inputGroupFile">Selecionar Arquivo</label>
+
+            </div>
+            <div class="input-group-append">
+                <input class="btn btn-outline-secondary" type="submit">
+            </div>
+        </div>
+
+<!--        https://stackoverflow.com/questions/48613992/bootstrap-4-file-input-doesnt-show-the-file-name-->
+        <script>
+            $('#inputGroupFile').on('change',function(){
+                //get the file name
+                var fileName = $(this).val().replace('C:\\fakepath\\', " ");
+                //replace the "Choose a file" label
+                $(this).next('.custom-file-label').html(fileName);
+            })
+
+        </script>
+
+    </form>
+
+
+    <pre width="40"></pre>
+    <hr>
+    <h5><b>Instruções:</b></h5>
+
+    <ol>
+        <li>Baixe o <a class="badge badge-secondary" href="{{ url_for('static', filename='files/Converter Municípios.xlsm') }}">template</a> de exemplo.</li>
+        <li>Siga as instruções do arquivo, exporte o csv, e volte para essa página.</li>
+        <li>Clique em "Selecionar Arquivo" e indique o arquivo exportado pelo template (rotas.csv).</li>
+        <li>Clique no botão "Enviar" e aguarde o download do csv com as distâncias.</li>
+        <li>No Excel, importe o csv baixado, conforme a figura:</li>
+    </ol>
+
+    <img style="width: 567px; height: 137px;" src="{{ url_for('static', filename='images/excel.jpeg') }}">
+
+    <hr>
+
+    <h5><b>Observações:</b></h5>
+
+    <ul style="list-style-type:disc;">
+        <li>Os arquivos estão limitados e 200k pares org-dest por vez.</li>
+        <li>O tempo de processamento de uma base de 200k pares é de aproximadamente 5 min.</li>
+        <li>A base de distâncias contém cerca de 95% dos pares possíveis de org-dest para os municípios do IBGE,
+            portanto sempre confira quais pares não possuem distância.
+        </li>
+    </ul>
+
+</div>
+
+</body>
+</html>

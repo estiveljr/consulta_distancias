@@ -1,0 +1,5 @@
+.idea/
+__pycache__/
+.gitignore.swp
+192.168.110.3-5000-distancias.url
+base_lista.csv

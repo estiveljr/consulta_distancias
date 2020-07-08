@@ -1,0 +1,3 @@
+call cd D:\Users\estivel.ramos\Documents\Distancias>
+call conda activate dist
+call python app.py
